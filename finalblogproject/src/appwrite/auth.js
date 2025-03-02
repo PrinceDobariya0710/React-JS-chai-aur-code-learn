@@ -42,13 +42,14 @@ export class AuthService {
             return await this.account.get();
         } catch (error) {
             console.log("Appwirte service :: getCurrentUser :: error ", error);
+
         }
         return null;
     }
 
-    async logout() {
+    logout() {
         try {
-            return await this.account.deleteSessions();
+            return this.account.deleteSessions();
         } catch (error) {
             console.log("Appwirte service :: logout :: error ", error);
         }

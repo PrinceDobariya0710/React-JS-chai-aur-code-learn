@@ -3,16 +3,15 @@ import appwriteService from '../appwrite/config'
 import { Container, PostCard } from '../components'
 
 const HomePage = () => {
-
     const [posts, setPosts] = useState([])
-    useEffect(() => {
-        appwriteService.getPosts([])
-            .then((posts) => {
-                if (posts) {
-                    setPosts(posts.documents)
-                }
-            })
 
+    useEffect(() => {
+        appwriteService.getPosts().then((posts) => {
+            if (posts) {
+                console.log(posts)
+                setPosts(posts.documents)
+            }
+        })
     }, [])
 
     if (posts.length === 0) {
@@ -37,7 +36,12 @@ const HomePage = () => {
                 <div className='flex flex-wrap'>
                     {posts.map((post) => (
                         <div key={post.$id} className='p-2 w-1/4'>
-                            <PostCard {...post} />
+                            <PostCard
+                                $id={post.$id}
+                                title={post.title}
+                                featuredImage={post.featuredImage}
+                            // Add any other specific props your PostCard needs
+                            />
                         </div>
                     ))}
                 </div>

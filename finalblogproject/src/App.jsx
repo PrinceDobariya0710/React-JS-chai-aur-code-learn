@@ -4,6 +4,7 @@ import './App.css'
 import authService from './appwrite/auth'
 import { login, logout } from './store/authSlice'
 import { Footer, Header } from './components'
+import { Outlet } from 'react-router-dom'
 
 function App() {
   const [loading, setLoading] = useState(true)
@@ -12,11 +13,15 @@ function App() {
     authService.getCurrentUser()
       .then((userData) => {
         if (userData) {
+          console.log(userData)
           dispatch(login({ userData }))
         }
         else {
           dispatch(logout({}))
         }
+      })
+      .catch((error) => {
+        console.log('Appwirte service :: getCurrentUser :: error ', error)
       })
       .finally(() => setLoading(false))
   }, [])
@@ -27,7 +32,7 @@ function App() {
         <div className='w-full block'>
           <Header />
           <main>
-            {/* Outlet */}
+            <Outlet />{/* Outlet */}
           </main>
           <Footer />
         </div>

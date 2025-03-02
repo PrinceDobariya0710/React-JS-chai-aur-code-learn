@@ -33,7 +33,7 @@ export class Service {
                 conf.appwriteDatabaseId,
                 conf.appwriteCollectionId,
                 slug,
-                { title, content, featuredImage, status, userId });
+                { title, content, featuredImage, status });
         } catch (error) {
             throw error;
         }
@@ -103,9 +103,9 @@ export class Service {
         }
     }
 
-    getFilePreview(fileID) {
+    getFilePreview(fileId) {
         try {
-            return this.bucket.getFilePreview(conf.appwriteBucketId, fileID)
+            return this.bucket.getFilePreview(conf.appwriteBucketId, fileId)
         } catch (error) {
             console.log("Appwirte service :: getFilePreview :: error ", error);
             return ""
